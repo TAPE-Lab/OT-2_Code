@@ -46,7 +46,7 @@ The following is an explanation/description of some functions used in the script
 
 
 ## NOTE:
-- For the 'source_headroom', you will need to measure the top of the tube of the source solution to the top of the meniscus of the solution millimetres using a caliper. 1 or 2 mm can be added onto this value to ensure the pipette tip enters into the solution.
+- For the `source_headroom`, you will need to measure the top of the tube of the source solution to the top of the meniscus of the solution millimetres using a caliper. 1 or 2 mm can be added onto this value to ensure the pipette tip enters into the solution.
 
 
 ## Acknowledgements

@@ -24,7 +24,7 @@ With some example protocols as well. Custom protocols can also be made using the
 
 The following is an explanation/description of some functions used in the scripts:
 
-**def custom_wetting**:
+**<def custom_wetting>**:
 - With the first transfer of any pipette, the pipette tip is completely unused. With some solutions, this means the first transfer will not pipette the same volume of solution as the subsequent transfers using the same pipette tip. This is because the subsequent transfers are using a tip which has already been 'wet' by the solution, whereas the first transfer is not 'wet'.
 - Therefore, this function aspirates a certain volume of solution and then dispenses that solution into the same tube. This allows the pipette tip to be 'wet' before the first transfer is made. Thus it reduces any variability in pipetting between the first and subsequent transfers through this step.
 - This step is only performed at the beginning of every isotope which will be pipetted. So 7 and 9 times in total for the 35-plex and 126-plex, respectively.
@@ -39,11 +39,11 @@ The following is an explanation/description of some functions used in the script
 
 
 
-'def custom_batch':
+**def custom_batch**:
 - This is the main function which includes the two functions above.
 - It allows a list of destinations, 'destinations_list', to be added as a parameter of the function. So that the specific barcode number, i.e. TOBis001 or TOBis 025, etc, can be added to that list. Then the robot will pipette the specific isotope allocated under 'source' and pipette the specific 'volume' from that source into all of the barcodes in 'destinations_list'.
 - It also includes a mathematical equation to allow the robot arm to decrease in height into the tube every time a specific volume is taken out. This is to ensure that as the protocol is progressing, the amount of volume in the source tube is decreasing, and thus, the robot arm decreases along with it to ensure that the pipette tip is always aspirating liquid.
 
 
 NOTE:
-- For the 'source_headroom
+- For the 'source_headroom', you will need to measure the top of the tube of the source solution to the top of the meniscus of the solution millimetres. This is a float

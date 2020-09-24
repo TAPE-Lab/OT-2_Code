@@ -24,7 +24,7 @@ With some example protocols as well. Custom protocols can also be made using the
 
 The following is an explanation/description of some functions used in the scripts:
 
-**<def custom_wetting>**:
+**`<def custom_wetting>`**:
 - With the first transfer of any pipette, the pipette tip is completely unused. With some solutions, this means the first transfer will not pipette the same volume of solution as the subsequent transfers using the same pipette tip. This is because the subsequent transfers are using a tip which has already been 'wet' by the solution, whereas the first transfer is not 'wet'.
 - Therefore, this function aspirates a certain volume of solution and then dispenses that solution into the same tube. This allows the pipette tip to be 'wet' before the first transfer is made. Thus it reduces any variability in pipetting between the first and subsequent transfers through this step.
 - This step is only performed at the beginning of every isotope which will be pipetted. So 7 and 9 times in total for the 35-plex and 126-plex, respectively.

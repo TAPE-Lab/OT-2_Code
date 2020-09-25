@@ -56,10 +56,18 @@ The following is an explanation/description of some functions used in the script
 
 ## 3. In the Script:
 
-Under the `def run(protocol: protocol_api.ProtocolContext):` function, enter:
-- enter location of tiprack on OT-2 deck.
-- enter the tuberack used and its location on OT-2 deck.
-- enter the plate used and its location on OT-2 deck. 
+Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, enter the:
+- location of tiprack on OT-2 deck.
+- the tuberack used and its location on OT-2 deck.<a name="myfootnote1">1</a>:
+- the plate used and its location on OT-2 deck. 
+
+<sup>[1](#myfootnote1)</sup>: note that if you are using a custom tuberack or plate that is note already loaded on the OT-2 Labware (enter link for OT-2 labware), then you must load it on using their custom labware setup guide
+
+Under the '# Source' heading, enter the positions of each individual isotope.
+
+Under the '# Source_Headroom' heading, enter the distance, in millimetres, between the top of the source tube (excluding the cap/lid) and the meniscus of the solution.
+
+Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner diameter of your source tube and enter value here.
 
 
 

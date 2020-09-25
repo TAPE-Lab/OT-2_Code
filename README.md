@@ -1,11 +1,11 @@
 # OT-2 Automated Barcode Pipetting
 
-## 1. Outline
-## 2. Custom Functions
-## 3. In the Script
-## 4. IMPORTANT: Before Starting
-## 5. Notes
-## 6. Acknowledgements
+1. Outline
+2. Custom Functions
+3. In the Script
+4. IMPORTANT: Before Starting
+5. Notes
+6. Acknowledgements
 
 
 

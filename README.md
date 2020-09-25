@@ -14,7 +14,7 @@
 [Section 6:](#Link6) Acknowledgements
 
 
-## 1. Outline:<name="Link1">1<>
+## Outline<sup name="Link1">1</sup>:
 
 Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
 
@@ -34,7 +34,7 @@ With some example protocols as well. Custom protocols can also be made using the
 
 
 
-## 2. Custom Functions:<sup name="Link2">2</sup>
+## Custom Functions<sup name="Link2">2</sup>:
 
 The following is an explanation/description of some functions used in the scripts:
 
@@ -61,7 +61,7 @@ The following is an explanation/description of some functions used in the script
 
 
 
-## 3. In the Script:<sup name="Link3">3</sup>
+## In the Script<sup name="Link3">3</sup>:
 
 Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, enter the:
 - location of tiprack on OT-2 deck
@@ -80,7 +80,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## 4. IMPORTANT: Before Starting<sup name="Link4">4</sup>
+## IMPORTANT: Before Starting<sup name="Link4">4</sup>
 
 - Ensure the `source` tubes/falcons/eppendorfs are the same used for all the isotopes, i.e. do not use a 15mL falcon for one isotope and a 1.5 mL eppendorf for another.
 - Measure the inner diameter of the `source` tube, in millimetres, using a precise caliper and enter into the `diameter` variable under the '# mm_lost_per_ul' heading.
@@ -91,7 +91,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## 5. Notes:<sup name="Link5">5</sup>
+## Notes<sup name="Link5">5</sup>:
 
 - For any tubes/eppendorfs/falcons used, it is recommended to use ones with a detachable lid/cap. This is so that the robot arm does not come into contact with any open lids whilst it moves positions.
 - It is recommended that a polypropylene 96 Deep Well Plate, which can hold at least 1 mL of volume, is used as a `destination` plate. It is also preferable to seal the plate tightly using an Aluminium Sealing film or a transparent after the protocol is completed.
@@ -100,7 +100,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## 6. Acknowledgements:<sup name="Link6">6</sup>
+## Acknowledgements<sup name="Link6">6</sup>:
 
 I would like to acknowledge the aid of and thank:
 - Dr Alaric Taylor, in helping me write the script and teaching me how to use the OT-2 machine.

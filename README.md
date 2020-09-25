@@ -57,11 +57,11 @@ The following is an explanation/description of some functions used in the script
 ## 3. In the Script:
 
 Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, enter the:
-- location of tiprack on OT-2 deck.
-- the tuberack used and its location on OT-2 deck.<a name="myfootnote1">1</a>:
-- the plate used and its location on OT-2 deck. 
+- location of tiprack on OT-2 deck
+- the tuberack used and its location on OT-2 deck <sup name="myfootnote1">1</sup>
+- the plate used and its location on OT-2 deck
 
-<sup>[1](#myfootnote1)</sup>: note that if you are using a custom tuberack or plate that is note already loaded on the OT-2 Labware (enter link for OT-2 labware), then you must load it on using their custom labware setup guide
+<sup>[1](#myfootnote1)</sup> note that if you are using a custom tuberack or plate that is note already loaded on the OT-2 Labware (enter link for OT-2 labware), then you must load it on using their custom labware setup guide
 
 Under the '# Source' heading, enter the positions of each individual isotope.
 

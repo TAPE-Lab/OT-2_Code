@@ -1,7 +1,7 @@
 # OT-2 Automated Barcode Pipetting
 
 
-Outline <sup>[1](#Link1)</sup>
+Outline <>[1](#Link1)</>
 
 Custom Functions <sup>[2](#Link2)</sup>
 

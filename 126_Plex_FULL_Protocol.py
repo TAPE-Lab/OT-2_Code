@@ -19,8 +19,7 @@ def custom_transfer(volume, source, source_headroom, destination, pipette):
     pipette.blow_out()
     
 def custom_batch(volume, source, source_headroom, destinations_list, pipette, mm_lost_per_ul):
-    number_of_destinations = len(destinations_list)            #DO WE NEED THIS?
-    headroom = source_headroom                     #DO WE NEED THIS?
+    headroom = source_headroom
     
     pipette.pick_up_tip()
     custom_wetting(volume, source, headroom, pipette)

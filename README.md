@@ -1,6 +1,6 @@
 # OT-2 Automated Barcode Pipetting
 
-1. [Outline][]
+### 1. Outline ###
 2. Custom Functions [^2]
 3. [^3] In the Script
 4. [^4] IMPORTANT: Before Starting
@@ -9,7 +9,7 @@
 
 
 
-### Outline: ###
+[Outline:][]
 
 Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
 

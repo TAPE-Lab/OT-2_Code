@@ -14,7 +14,7 @@
 [Section 6:](#Link6) Acknowledgements
 
 
-## Outline<sup name="Link1">1</sup>:
+## Outline<sup name="Link1"> </sup>:
 
 Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
 
@@ -100,7 +100,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## Acknowledgements<sup name="Link6">6</sup>:
+## Acknowledgements<sup name="Link6"> </sup>:
 
 I would like to acknowledge the aid of and thank:
 - Dr Alaric Taylor, in helping me write the script and teaching me how to use the OT-2 machine.

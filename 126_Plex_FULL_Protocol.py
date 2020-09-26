@@ -20,7 +20,6 @@ def custom_transfer(volume, source, source_headroom, destination, pipette):
     
 def custom_batch(volume, source, source_headroom, destinations_list, pipette, mm_lost_per_ul):
     headroom = source_headroom
-    
     pipette.pick_up_tip()
     custom_wetting(volume, source, headroom, pipette)
     for destination in destinations_list:
@@ -31,16 +30,15 @@ def custom_batch(volume, source, source_headroom, destinations_list, pipette, mm
     
 
 def run(protocol: protocol_api.ProtocolContext):
-    #tiprack is yet to be determined but I'm just using the opentrons tips in this case.
-    tiprack = protocol.load_labware('opentrons_96_filtertiprack_200ul', 9)      #Need to change the location
-    tuberack = protocol.load_labware('adrena_40_wellplate_1500ul', 6)     #Need to change tuberack
-    plate_1 = protocol.load_labware('starlab_96_wellplate_1200ul', 3)          #Need to add labware and change location
-    plate_2 = protocol.load_labware('starlab_96_wellplate_1200ul', 4)     #Need to add labware and change location
+    tiprack = protocol.load_labware('opentrons_96_filtertiprack_200ul', )      #After the comma, enter location of tiprack on OT-2 deck.
+    tuberack = protocol.load_labware('', )     #After the comma, enter the tuberack used and its location on OT-2 deck.
+    plate_1 = protocol.load_labware('', )     #After the comma, enter the plate used and its location on OT-2 deck. 
+    plate_2 = protocol.load_labware('', )     #After the comma, enter the plate used and its location on OT-2 deck. 
     p50 = protocol.load_instrument('p50_single', 'left', tip_racks=[tiprack])
 
 
     #This is the SOURCE
-    Te122 = tuberack.well('')   #ENTER LOCATION
+    Te122 = tuberack.well('')   #Enter the location of all the isotopes positioned on the tuberack itself.
     Te123 = tuberack.well('')
     Te124 = tuberack.well('')
     Te125 = tuberack.well('')
@@ -51,19 +49,21 @@ def run(protocol: protocol_api.ProtocolContext):
     Pt198 = tuberack.well('')
     
 
-    # Measurement of distance between meniscus and top of vial in mm. This is the SOURCE_HEADROOM.
-    Te122_headroom =
-    Te123_headroom =       #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
+    # Measurement of distance between meniscus and top of vial in mm.
+    # This is the SOURCE_HEADROOM.
+    Te122_headroom = 
+    Te123_headroom = 
     Te124_headroom = 
     Te125_headroom = 
     Te126_headroom = 
     Te128_headroom = 
-    Te130_headroom =
+    Te130_headroom = 
     Pt196_headroom = 
     Pt198_headroom = 
     
 
     #This is the DESTINATION
+    #Only change the destionation if not using a 96 Deep Well Plate
     TOBis001 = plate_1.well('A1')
     TOBis002 = plate_1.well('B1')
     TOBis003 = plate_1.well('C1')
@@ -193,22 +193,12 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis126 = plate_2.well('F4')
 
 
-
-    
-    diameter = 9.9
+    # mm_lost_per_ul
+    diameter =           #Measure, in millimetres, the inner diameter of your source tube and enter value here.
     disc_area = np.pi * (diameter/2) * (diameter/2)
     mm_lost_per_ul = 1/disc_area
-    
-    # # Debugging maths problems!
-    # protocol.comment(str(mm_lost_per_ul))
-    # protocol.pause('Has units of mm_lost_per_ul been captured correctly?')
-    # protocol.comment('Headroom before calculation '+ str(Te122_headroom))
-    # Te122_headroom += mm_lost_per_ul * 22
-    # protocol.comment('Headroom after calculation ' + str(Te122_headroom))
-    # protocol.pause('Has the calculation run correctly?')
 
 
-    
     #Te-122
     custom_batch(22, Te122, Te122_headroom, [TOBis001,
     TOBis002,
@@ -327,6 +317,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis090,
     TOBis091], p50, mm_lost_per_ul)
 
+
     #Te-124
     custom_batch(18, Te124, Te124_headroom, [TOBis001,
     TOBis002,
@@ -384,6 +375,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis109,
     TOBis110,
     TOBis111], p50, mm_lost_per_ul)
+
 
     #Te-125
     custom_batch(15, Te125, Te125_headroom, [TOBis001,
@@ -561,6 +553,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis124,
     TOBis126], p50, mm_lost_per_ul)
 
+
     #Te-130
     custom_batch(9.6, Te130, Te130_headroom, [TOBis004,
     TOBis009,
@@ -618,7 +611,6 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis123,
     TOBis125,
     TOBis126], p50, mm_lost_per_ul)
-
 
 
     #PT-196
@@ -680,7 +672,6 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis126], p50, mm_lost_per_ul)
 
 
-
     #PT-198
     custom_batch(5, Pt198, Pt198_headroom, [TOBis006,
     TOBis011,
@@ -738,5 +729,3 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis124,
     TOBis125,
     TOBis126], p50, mm_lost_per_ul)
-
-

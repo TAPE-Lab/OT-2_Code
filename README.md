@@ -5,7 +5,7 @@
 
 [Section 2:](#Link2) Custom Functions
 
-[Section 3:](#Link3) In the Script
+[Section 3:](#Link3) Editing the Script
 
 [Section 4:](#Link4) IMPORTANT: Before Starting
 
@@ -14,11 +14,11 @@
 [Section 6:](#Link6) Acknowledgements
 
 
-## Outline<sup name="Link1"> </sup>:
+## Outline<sup name="Link1"></sup>:
 
 Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
 
-Secondly, to understand the latest version of TOBis, to know the concentrations used and a very specific, step-by-step guide in carrying out the entire TOBis CyTOF protocol, please read the 2020 Nature Protocols, Qin et al. paper here: [Multiplexed Single-Cell Analysis of Organoid Signaling Networks](#Enter LINK here).
+Secondly, to understand the latest version of TOBis, to know the concentrations and volumes used and a very specific, step-by-step guide in carrying out the entire TOBis CyTOF protocol, please read the 2020 Nature Protocols, Qin et al. paper here: [Multiplexed Single-Cell Analysis of Organoid Signaling Networks](#Enter LINK here).
 
 Lastly, a guide of using the OT-2 software and writing protocols can all be found on their [website](https://docs.opentrons.com/v2/). It includes the explanation of and how to use:
 - Versioning
@@ -29,17 +29,18 @@ Lastly, a guide of using the OT-2 software and writing protocols can all be foun
 - Complex Commands
 - API Version 2 Reference
 - Advanced Control
+
 With some example protocols as well. Custom protocols can also be made using their 'Protocol Designer', however it's not recommended to do use for complex protocols.
 [↩](#Link1)
 
 
 
-## Custom Functions<sup name="Link2">2</sup>:
+## Custom Functions<sup name="Link2"></sup>:
 
 The following is an explanation/description of some functions used in the scripts:
 
 **`def custom_wetting`:**
-- The first transfer of any solution, the pipette tip is completely unused. With some solutions, this means the first transfer will not pipette the same volume of solution as the subsequent transfers using the same pipette tip. This is because the subsequent transfers are using a tip which has already been 'wet' by the solution, whereas the first transfer is not 'wet'.
+- The first transfer of any solution, the pipette tip is completely unused. With some solutions, this means the first transfer may not pipette the same volume of solution as the subsequent transfers using the same pipette tip. This is because the subsequent transfers are using a tip which has already been 'wet' by the solution, whereas the first transfer is not 'wet'.
 - Therefore, this function aspirates a certain volume of solution and then dispenses that solution into the same tube. This allows the pipette tip to be 'wet' before the first transfer is made. Thus it reduces any variability in pipetting between the first and subsequent transfers using this step.
 - This step is only performed at the beginning of every isotope which will be pipetted. So 7 and 9 times in total for the 35-plex and 126-plex, respectively.
 
@@ -61,26 +62,26 @@ The following is an explanation/description of some functions used in the script
 
 
 
-## In the Script<sup name="Link3">3</sup>:
+## Editing the Script<sup name="Link3"></sup>:
 
-Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, enter the:
-- location of tiprack on OT-2 deck
-- the tuberack used and its location on OT-2 deck<sup>[a](#subfootnote)</sup>
-- the plate used and its location on OT-2 deck
+- Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, **enter** the:
+    - location of the tiprack on the OT-2 deck
+    - the tuberack used and its location on the OT-2 deck<sup>[a](#subfootnote)</sup>
+    - the plate used and its location on the OT-2 deck
 
- <sup name="subfootnote">a</sup> note that if you are using a custom tuberack or plate that is note already loaded on the OT-2 Labware (enter link for OT-2 labware), then you must load it on using their custom labware setup guide.
+ <sup name="subfootnote">a</sup> Note that if you are using a custom tuberack or plate that is note already loaded on the [OT-2 Labware](https://docs.opentrons.com/v2/new_labware.html), then you must load it on using their [custom labware setup](https://labware.opentrons.com/create/) guide.
 
-Under the '# Source' heading, enter the positions of each individual isotope.
+- Under the '# Source' heading, enter the positions of each individual isotope located on the tuberack.
 
-Under the '# Source_Headroom' heading, enter the distance, in millimetres, between the top of the source tube (excluding the cap/lid) and the meniscus of the solution.
+- Under the '# Source_Headroom' heading, enter the distance, in millimetres, between the top of the source tube (excluding the cap/lid) and the meniscus of the solution.
 
-Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner diameter of your source tube and enter value here.
+- Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner diameter of your source tube and enter value here.
 [↩](#Link3)
 
 
 
 
-## IMPORTANT: Before Starting<sup name="Link4">4</sup>
+## IMPORTANT: Before Starting<sup name="Link4"></sup>
 
 - Ensure the `source` tubes/falcons/eppendorfs are the same used for all the isotopes, i.e. do not use a 15mL falcon for one isotope and a 1.5 mL eppendorf for another.
 - Measure the inner diameter of the `source` tube, in millimetres, using a precise caliper and enter into the `diameter` variable under the '# mm_lost_per_ul' heading.
@@ -91,7 +92,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## Notes<sup name="Link5">5</sup>:
+## Notes<sup name="Link5"></sup>:
 
 - For any tubes/eppendorfs/falcons used, it is recommended to use ones with a detachable lid/cap. This is so that the robot arm does not come into contact with any open lids whilst it moves positions.
 - It is recommended that a polypropylene 96 Deep Well Plate, which can hold at least 1 mL of volume, is used as a `destination` plate. It is also preferable to seal the plate tightly using an Aluminium Sealing film or a transparent after the protocol is completed.
@@ -100,7 +101,7 @@ Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner di
 
 
 
-## Acknowledgements<sup name="Link6"> </sup>:
+## Acknowledgements<sup name="Link6"></sup>:
 
 I would like to acknowledge the aid of and thank:
 - Dr Alaric Taylor, in helping me write the script and teaching me how to use the OT-2 machine.

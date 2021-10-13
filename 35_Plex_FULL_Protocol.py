@@ -99,6 +99,7 @@ def run(protocol: protocol_api.ProtocolContext):
     diameter =      #Measure, in millimetres, the inner diameter of your source tube and enter value here.
     disc_area = np.pi * (diameter/2) * (diameter/2)
     mm_lost_per_ul = 1/disc_area
+    new_variable="test"
 
 
     # Te-122

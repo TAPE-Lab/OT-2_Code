@@ -18,7 +18,7 @@
 
 Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
 
-Secondly, to understand the latest version of TOBis, to know the concentrations and volumes used and a very specific, step-by-step guide in carrying out the entire TOBis CyTOF protocol, please read the 2020 Nature Protocols, Qin et al. paper here: [Multiplexed Single-Cell Analysis of Organoid Signaling Networks](#Enter LINK here).
+Secondly, to understand the latest version of TOBis, to know the concentrations and volumes used and a very specific, step-by-step guide in carrying out the entire TOBis CyTOF protocol, please read the 2021 Nature Protocols, Sufi et al. paper: [Multiplexed single-cell analysis of organoid signaling networks](https://doi.org/10.1038/s41596-021-00603-4).
 
 Lastly, a guide of using the OT-2 software and writing protocols can all be found on their [website](https://docs.opentrons.com/v2/). It includes the explanation of and how to use:
 - Versioning

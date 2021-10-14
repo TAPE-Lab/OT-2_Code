@@ -52,15 +52,15 @@ def run(protocol: protocol_api.ProtocolContext):
     
 
     # Measurement of distance between meniscus and top of vial in mm. This is the SOURCE_HEADROOM.
-    Te122_headroom = 
-    Te123_headroom =               #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
-    Te124_headroom = 
-    Te125_headroom = 
-    Te126_headroom = 
-    Te128_headroom = 
-    Te130_headroom =
+    Te122_headroom = 0
+    Te123_headroom = 0             #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
+    Te124_headroom = 0
+    Te125_headroom = 0
+    Te126_headroom = 0
+    Te128_headroom = 0
+    Te130_headroom = 0
 
-    DMSO_headroom =  
+    DMSO_headroom = 0  
     
 
     #This is the DESTINATION

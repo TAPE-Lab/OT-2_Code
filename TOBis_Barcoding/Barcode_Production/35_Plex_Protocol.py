@@ -15,7 +15,6 @@ def custom_transfer(volume, source, source_headroom, destination, pipette):
     pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
     pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
     pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
-    pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
     
 def custom_batch(volume, source, source_headroom, destinations_list, pipette, mm_lost_per_ul_eppendorf):
     headroom = source_headroom

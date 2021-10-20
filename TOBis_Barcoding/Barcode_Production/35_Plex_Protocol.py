@@ -9,12 +9,12 @@ def custom_transfer(volume, source, source_headroom, destination, pipette):
     pipette.aspirate(volume,source.top(-source_headroom -5))
     pipette.touch_tip()
     pipette.air_gap(2)
-    pipette.dispense(volume+5,destination.top(-1))
+    pipette.dispense(volume+5,destination.top(-2))
     pipette.blow_out()
-    pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
-    pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
-    pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
-    pipette.touch_tip(radius=0.15, v_offset=1, speed=80)
+    pipette.touch_tip(radius=0.15, v_offset=-1, speed=80)
+    pipette.touch_tip(radius=0.15, v_offset=-1, speed=80)
+    pipette.touch_tip(radius=0.15, v_offset=-1, speed=80)
+    pipette.touch_tip(radius=0.15, v_offset=-1, speed=80)
     
 def custom_batch(volume, source, source_headroom, destinations_list, pipette, mm_lost_per_ul_eppendorf):
     headroom = source_headroom
@@ -38,7 +38,7 @@ def run(protocol: protocol_api.ProtocolContext):
     tuberack = protocol.load_labware('opentrons_24_tuberack_eppendorf_2ml_safelock_snapcap', 5)
     deepwell_plate_35_plex = protocol.load_labware('starlab_96_wellplate_1200ul', 6)
 
-    DMSO_falcon = protocol.load_labware('opentrons_6_tuberack_falcon_50ml_conical', 3)
+    DMSO_falcon = protocol.load_labware('opentrons_6_tuberack_falcon_50ml_conical', 2)
 
 
     #This is the SOURCE
@@ -52,15 +52,15 @@ def run(protocol: protocol_api.ProtocolContext):
     
 
     # Measurement of distance between meniscus and top of vial in mm. This is the SOURCE_HEADROOM.
-    Te122_headroom = 0
-    Te123_headroom = 0             #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
-    Te124_headroom = 0
-    Te125_headroom = 0
-    Te126_headroom = 0
-    Te128_headroom = 0
-    Te130_headroom = 0
+    Te122_headroom = 28.21   #500 uL
+    Te123_headroom = 28.77   #475 uL         #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
+    Te124_headroom = 28.21   #500 uL
+    Te125_headroom = 29.35   #450 uL 
+    Te126_headroom = 29.35   #450 uL 
+    Te128_headroom = 28.77   #475 uL 
+    Te130_headroom = 28.77   #475 uL 
 
-    DMSO_headroom = 0  
+    DMSO_headroom = 30.18    #Pipette exactly 40 mL of DMSO
     
 
     #This is the DESTINATION
@@ -105,58 +105,60 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis35 = deepwell_plate_35_plex.well('C5')
 
 
-    DMSO_dict = {TOBis01:953.73,
-    TOBis02:956.73,
-    TOBis03:956.73,
-    TOBis04:955.73,
-    TOBis05:955.73,
-    TOBis06:952.33,
-    TOBis07:952.33,
-    TOBis08:951.33,
-    TOBis09:951.33,
-    TOBis10:955.33,
-    TOBis11:954.33,
-    TOBis12:954.33,
-    TOBis13:954.33,
-    TOBis14:954.33,
-    TOBis15:953.33,
-    TOBis16:953.40,
-    TOBis17:953.40,
-    TOBis18:952.40,
-    TOBis19:952.40,
-    TOBis20:956.40,
-    TOBis21:955.40,
-    TOBis22:955.40,
-    TOBis23:955.40,
-    TOBis24:955.40,
-    TOBis25:954.40,
-    TOBis26:952.00,
-    TOBis27:951.00,
-    TOBis28:951.00,
-    TOBis29:951.00,
-    TOBis30:951.00,
-    TOBis31:950.00,
-    TOBis32:954.00,
-    TOBis33:954.00,
-    TOBis34:953.00,
-    TOBis35:953.00}
+    DMSO_dict = {TOBis01:947.4,
+    TOBis02:950.4,
+    TOBis03:950.4,
+    TOBis04:949.4,
+    TOBis05:949.4,
+    TOBis06:949.4,
+    TOBis07:949.4,
+    TOBis08:948.4,
+    TOBis09:948.4,
+    TOBis10:952.4,
+    TOBis11:951.4,
+    TOBis12:951.4,
+    TOBis13:951.4,
+    TOBis14:951.4,
+    TOBis15:950.4,
+    TOBis16:950.0,
+    TOBis17:950.0,
+    TOBis18:949.0,
+    TOBis19:949.0,
+    TOBis20:953.0,
+    TOBis21:952.0,
+    TOBis22:952.0,
+    TOBis23:952.0,
+    TOBis24:952.0,
+    TOBis25:951.0,
+    TOBis26:952.0,
+    TOBis27:951.0,
+    TOBis28:951.0,
+    TOBis29:951.0,
+    TOBis30:951.0,
+    TOBis31:950.0,
+    TOBis32:954.0,
+    TOBis33:954.0,
+    TOBis34:953.0,
+    TOBis35:953.0}
+
+
 
 
     diameter_50ml_falcon = 28
     disc_area_50ml_falcon = np.pi * (diameter_50ml_falcon/2) * (diameter_50ml_falcon/2)
     mm_lost_per_ul_50ml_falcon = 1/disc_area_50ml_falcon
 
-    p1000_single.flow_rate.aspirate = 200
-    p1000_single.default_speed = 200
+    p1000_single.flow_rate.aspirate = 250
+    p1000_single.default_speed = 250
     p1000_single.pick_up_tip()
-    p1000_single.mix(2, 1000, DMSO_falcon)
+    p1000_single.mix(2, 1000, DMSO_falcon.well('A3').top(-DMSO_headroom-10))
     for location, volume in DMSO_dict.items():
-        p1000_single.aspirate(volume, DMSO_falcon.well('A1')) 
-        protocol.delay(1.5)
+        p1000_single.aspirate(volume, DMSO_falcon.well('A3').top(-DMSO_headroom-15)) 
+        protocol.delay(1)
         p1000_single.air_gap(5)
-        protocol.delay(1.5)
+        protocol.delay(1)
         p1000_single.dispense(volume+20, location.top(-5))
-        protocol.delay(1.5)
+        protocol.delay(1)
         p1000_single.blow_out(location.top(-2))
         DMSO_headroom += mm_lost_per_ul_50ml_falcon * volume
     p1000_single.drop_tip()
@@ -164,13 +166,12 @@ def run(protocol: protocol_api.ProtocolContext):
 
    
 
-
     diameter_eppendorf = 9.9
     disc_area_eppendorf = np.pi * (diameter_eppendorf/2) * (diameter_eppendorf/2)
     mm_lost_per_ul_eppendorf = 1/disc_area_eppendorf
    
-    #Te-122 - working concentration = 1.5 mM
-    custom_batch(14.67, Te122, Te122_headroom, [TOBis01,
+    #Te-122 - working concentration = 1.25 mM
+    custom_batch(17.6, Te122, Te122_headroom, [TOBis01,
     TOBis02,
     TOBis03,
     TOBis04,
@@ -187,8 +188,8 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis15], p20_single, mm_lost_per_ul_eppendorf)
 
 
-    #Te-123 - working concentration = 1.5 mM
-    custom_batch(13.6, Te123, Te123_headroom, [TOBis01,
+    #Te-123 - working concentration = 1.20 mM
+    custom_batch(17, Te123, Te123_headroom, [TOBis01,
     TOBis02,
     TOBis03,
     TOBis04,
@@ -205,7 +206,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis25], p20_single, mm_lost_per_ul_eppendorf)
 
 
-    #Te-124 - working concentration = 1 mM
+    #Te-124 - working concentration = 1.0 mM
     custom_batch(18, Te124, Te124_headroom, [TOBis01,
     TOBis06,
     TOBis07,
@@ -223,7 +224,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis31], p20_single, mm_lost_per_ul_eppendorf)
 
 
-    #Te-125 - working concentration = 1 mM
+    #Te-125 - working concentration = 1.0 mM
     custom_batch(15, Te125, Te125_headroom, [TOBis02,
     TOBis06,
     TOBis10,
@@ -241,7 +242,7 @@ def run(protocol: protocol_api.ProtocolContext):
     TOBis34], p20_single, mm_lost_per_ul_eppendorf)
 
 
-    #Te-126 - working concentration = 1 mM
+    #Te-126 - working concentration = 1.0 mM
     custom_batch(15, Te126, Te126_headroom, [TOBis03,
     TOBis07,
     TOBis10,

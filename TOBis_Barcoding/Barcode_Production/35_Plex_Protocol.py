@@ -60,7 +60,7 @@ def run(protocol: protocol_api.ProtocolContext):
     Te128_headroom = 28.77   #475 uL 
     Te130_headroom = 28.77   #475 uL 
 
-    DMSO_headroom = 30.18    #Pipette exactly 40 mL of DMSO
+    DMSO_headroom = 30.18    #Pipette exactly 40 mL of DMSO into a 50mL falcon
     
 
     #This is the DESTINATION

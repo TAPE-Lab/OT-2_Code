@@ -55,15 +55,16 @@ def run(protocol: protocol_api.ProtocolContext):
     
 
     # Measurement of distance between meniscus and top of vial in mm. This is the SOURCE_HEADROOM.
-    Te122_headroom = 17.00
-    Te123_headroom = 17.90      #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
-    Te124_headroom = 16.10
-    Te125_headroom = 20.00
-    Te126_headroom = 20.00
-    Te128_headroom = 18.75
-    Te130_headroom = 18.75
-    Pt196_headroom = 22.00
-    Pt198_headroom = 22.00
+    # If using the volumes stated in the "OT-2 126-plex Barcode Kit Pipetting Working Stock Calculations", then there is no need to change the heights below.
+    Te122_headroom = 17.00  #1200 µL
+    Te123_headroom = 17.90  #1150 µL      
+    Te124_headroom = 16.10  #1250 µL
+    Te125_headroom = 20.00  #1000 µL
+    Te126_headroom = 20.00  #1000 µL
+    Te128_headroom = 18.75  #1100 µL
+    Te130_headroom = 18.75  #1100 µL
+    Pt196_headroom = 22.00  #900 µL
+    Pt198_headroom = 22.00  #900 µL
     
 
     #This is the DESTINATION

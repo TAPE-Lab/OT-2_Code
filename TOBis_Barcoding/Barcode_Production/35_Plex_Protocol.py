@@ -52,13 +52,14 @@ def run(protocol: protocol_api.ProtocolContext):
     
 
     # Measurement of distance between meniscus and top of vial in mm. This is the SOURCE_HEADROOM.
-    Te122_headroom = 28.21   #500 uL
-    Te123_headroom = 28.77   #475 uL         #ENTER DEPTH FROM MINICUS TO TOP OF VIAL 
-    Te124_headroom = 28.21   #500 uL
-    Te125_headroom = 29.35   #450 uL 
-    Te126_headroom = 29.35   #450 uL 
-    Te128_headroom = 28.77   #475 uL 
-    Te130_headroom = 28.77   #475 uL 
+    # If using the volumes stated in the "OT-2 35-plex Barcode Kit Pipetting Working Stock Calculations", then there is no need to change the heights below.
+    Te122_headroom = 28.21   #500 µL
+    Te123_headroom = 28.77   #475 µL    
+    Te124_headroom = 28.21   #500 µL
+    Te125_headroom = 29.35   #450 µL 
+    Te126_headroom = 29.35   #450 µL 
+    Te128_headroom = 28.77   #475 µL 
+    Te130_headroom = 28.77   #475 µL 
 
     DMSO_headroom = 30.18    #Pipette exactly 40 mL of DMSO into a 50mL falcon
     

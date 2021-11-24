@@ -6,13 +6,7 @@
 
 [Section 2:](#Link2) Custom Functions
 
-[Section 3:](#Link3) Editing the Script
-
-[Section 4:](#Link4) IMPORTANT: Before Starting
-
-[Section 5:](#Link5) Notes
-
-[Section 6:](#Link6) Acknowledgements
+[Section 3:](#Link5) Notes
 
 
 ## Introduction<sup name="Link1"></sup>:

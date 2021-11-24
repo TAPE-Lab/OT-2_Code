@@ -74,18 +74,3 @@ the same consumables **(WRITE DOWN A LIST OF CONSUMABLES ON A WORD DOCUMENT!!)**
 ## Notes<sup name="Link5"></sup>:
 
 - Seal the deep-well plate tightly using an aluminium or transparent sealing film after the protocol is completed.
-
-
-
-
-
-## Acknowledgements<sup name="Link6"></sup>:
-
-I would like to acknowledge the aid of and thank:
-- Dr Alaric Taylor, in helping me write the script and teaching me how to use the OT-2 machine.
-- Ferran Cardoso ([@FerranC96](https://github.com/FerranC96)) for helping me set up the 'OT-2 Automated Barcode Pipetting' GitHub repository. 
-- And lastly, the [TAPE Lab](http://tape-lab.com/lab) group for their continuous support in helping create the TOBis barcoding strategy.
-
-The work here is actively being developed by Jahangir Sufi.
-
-[Return to contents](# )

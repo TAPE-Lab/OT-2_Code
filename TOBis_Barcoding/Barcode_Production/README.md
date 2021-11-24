@@ -1,7 +1,8 @@
-# OT-2 Automated Barcode Pipetting
+# OT-2 Automated Barcode Production
 
+<sup name=" "></sup>
 
-[Section 1:](#Link1) Outline
+[Section 1:](#Link1) Introduction
 
 [Section 2:](#Link2) Custom Functions
 
@@ -14,89 +15,66 @@
 [Section 6:](#Link6) Acknowledgements
 
 
-## Outline<sup name="Link1"></sup>:
+## Introduction<sup name="Link1"></sup>:
 
-Before beginning, it is recommended to read the 2020 Nature Methods, Qin et al. paper here: [Cell-type-specific signaling networks in heterocellular organoids](https://www.nature.com/articles/s41592-020-0737-8). This will give an overview of why TOBis is used instead of the traditional Fluidigm barcoding, it's advantages and also an application of its use on intestinal organoids.
+The scripts in this section were created in order to produce the 35-plex or 126-plex TOBis barcodes using the OT-2 robot. Using the OT-2 robot reduces human error during production, increases individual pipetting accuracy and also accuracy between batches and saves the user a substantial amount of time.
 
-Secondly, to understand the latest version of TOBis, to know the concentrations and volumes used and a very specific, step-by-step guide in carrying out the entire TOBis CyTOF protocol, please read the 2021 Nature Protocols, Sufi et al. paper: [Multiplexed single-cell analysis of organoid signaling networks](https://doi.org/10.1038/s41596-021-00603-4).
-
-Lastly, a guide of using the OT-2 software and writing protocols can all be found on their [website](https://docs.opentrons.com/v2/). It includes the explanation of and how to use:
-- Versioning
-- Labware
-- Hardware Modules
-- Pipettes
-- Building Block Commands
-- Complex Commands
-- API Version 2 Reference
-- Advanced Control
-
-With some example protocols as well. Custom protocols can also be made using their 'Protocol Designer', however it's not recommended to do use for complex protocols.
-[↩](#Link1)
-
+An excel sheet has been uploaded to give the users more information in understanding why the specific concentrations and volumes are used in the master and working stocks in producing both the 35-plex and 126-plex TOBis barcodes, along with the amount of DMSO needed to make 1 mL of barcodes. This can then be aliquoted in 20 µL amounts to make approximately 45-50 full 35-plex or 126-plex barcoding kits.
+- Ideally, for the ease of the user and in preventing any other errors, the concentrations and volumes should be kept exactly how they have been detailed in the excel sheet. This also means the script does not need to be edited or adjusted whatsoever.
 
 
 ## Custom Functions<sup name="Link2"></sup>:
 
-The following is an explanation/description of some functions used in the scripts:
-
-**`def custom_wetting`:**
-- The first transfer of any solution, the pipette tip is completely unused. With some solutions, this means the first transfer may not pipette the same volume of solution as the subsequent transfers using the same pipette tip. This is because the subsequent transfers are using a tip which has already been 'wet' by the solution, whereas the first transfer is not 'wet'.
-- Therefore, this function aspirates a certain volume of solution and then dispenses that solution into the same tube. This allows the pipette tip to be 'wet' before the first transfer is made. Thus it reduces any variability in pipetting between the first and subsequent transfers using this step.
-- This step is only performed at the beginning of every isotope which will be pipetted. So 7 and 9 times in total for the 35-plex and 126-plex, respectively.
-
+The following explains certain functions used in the scripts which specifically and greatly minimises any possible flaws/mistakes during the production of the barcodes whilst also vastly increasing the accuracy of the transfers.
 
 **`def custom_transfer`:**
-- This function is a collection of commands that is more than the basic `transfer` command used in the OT-2 software.
-- It includes the following commands, as well as the simple `aspirate` and `dispense`:
-    - **`touch_tip`**: After each aspiration of the pipette. The robot arm touches the pipette tip onto 4 opposite sides of the inner part of the tube. This allows any remaining solution on the outside of the pipette tip to fall off into the tube it was aspirated from. 
-    - **`air_gap`**: After the `touch_tip` command, the pipette aspirates a set amount of air. This is to ensure that no solution can accidentally drop out of the pipette tip when the robot arm is moving positions.
-    - **`blow_out`**: After the pipette has completely dispensed the solution into the destination tube, the pipette then dispenses an extra amount of air. This is to ensure that all of the volume is dispensed out of the pipette tip.
-- All the additional commands above, in unision, vastly increases the accuracy of the transfer, as they do not allow any extra solution to cling onto the exterior of the pipette tip and be added to the destination tube (using `touch_tip`), it ensures all of the solution is transferred from the `source` to the `destination` (using`air_gap`) and lastly ensures that all of the solution is added to the `destination` (using`blow_out`). 
+- This function utilises a collection of commands including:
+    - **`air_gap`**: The pipette aspirates a set amount of air to ensure no solution can accidentally drop out of the pipette tip when the robot arm is moving positions.
+    - **`blow_out`**: After the pipette has completely dispensed the solution into the destination tube, the pipette dispenses an extra amount of air to ensure all of the solution is dispensed out of the pipette tip.
+    - **`touch_tip`**: Post-`blow_out`, this `touch_tip` command has been specifically optimised to ensure that any remaining droplet on the pipette tip itself falls only into the destination well, whilst simultaneously not touching the sides of the destination well. This ensures that any remaining droplet on the pipette tip will not fall into any other destination well whilst the robot arm is in transit. It also ensures the pipette tip is not contaminated with any other elements within the barcoding structure so that the same tip can be used for that specific element. 
 
 
 **`def custom_batch`:**
-- This is the main function which includes the two functions above.
-- It allows a list of destinations, `destinations_list`, to be added as a parameter of the function. So that the specific barcode number, i.e. TOBis001/TOBis002...TOBis053, etc, can be added to that list. The robot will pipette the specific isotope allocated under `source` and pipette the specific `volume` into all of the barcodes listed in `destinations_list`.
-- It also includes a mathematical equation to allow the robot arm to decrease into the tube every time a specific volume is aspirated. This ensures that after each transfer, as the amount of volume in the `source` tube decreases, the robot arm decreases in height proportional to the decrease in volume. Ensuring the pipette tip is always in contact with and aspirating the solution.
-[↩](#Link2)
+- This is the main function, which includes the function above, to produce the barcodes.
+- It essentially loops over a list of destination wells from the `destinations_list` and pipettes a set `volume` of a specific `source` isotope into all of the wells listed in the `destinations_list`.
+- It also includes a mathematical equation, `mm_lost_per_ul_eppendorf`, to allow the robot arm to decrease in height into the tube every time the specific volume is aspirated. This ensures that after each transfer, as the amount of volume in the `source` tube decreases, the robot arm decreases in height proportional to the decrease in volume of the eppendorf, ensuring the pipette tip is always in contact with and aspirating the solution.
+
+[Return to contents](# )
 
 
 
 ## Editing the Script<sup name="Link3"></sup>:
 
-- Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, **enter** the:
-    - location of the tiprack on the OT-2 deck
-    - the tuberack used and its location on the OT-2 deck<sup>[a](#subfootnote)</sup>
-    - the plate used and its location on the OT-2 deck
+- As mentioned in the introduction, if the user replicates the concentrations and volumes used exactly in the excel sheet, uses the same labware and places them in the same position as stated in the script, there is no need to edit the script. This is highly recommended.
 
- <sup name="subfootnote">a</sup> Note that if you are using a custom tuberack or plate that is note already loaded on the [OT-2 Labware](https://docs.opentrons.com/v2/new_labware.html), then you must load it on using their [custom labware setup](https://labware.opentrons.com/create/) guide.
+- However, if different labware, concentrations and volumes of any solution were used, then the script must be edited. Within the script itself, under the `def run(protocol: protocol_api.ProtocolContext):` function, enter the location of the labware on the OT-2 deck and the type used of the:
+    - tiprack
+    - tuberack<sup>[a](#subfootnote)</sup>
+    - deep well plate(s)<sup>[a](#subfootnote)</sup>
 
-- Under the '# Source' heading, enter the positions of each individual isotope located on the tuberack.
+    In addition to the above:
+    - Under the '#This is the SOURCE' heading, enter the positions of each individual isotopes located on the tuberack. Ensure the `source` eppendorfs are the same used for all the isotopes, i.e. do not use a 15mL falcon for one isotope and a 1.5 mL eppendorf for another.
+    - Under the '#This is the SOURCE_HEADROOM' heading, enter the distance, in millimetres, between the top of the source tube (excluding the cap/lid) and the meniscus of the solution. This is measured using a digital caliper. 1 or 2 millimetres can be added onto this value to ensure the pipette tip enters into the solution.
+    - Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner diameter of your source tube and enter the value here.
 
-- Under the '# Source_Headroom' heading, enter the distance, in millimetres, between the top of the source tube (excluding the cap/lid) and the meniscus of the solution.
-
-- Lastly, under  '# mm_lost_per_ul' heading, measure, in millimetres, the inner diameter of your source tube and enter value here.
-[↩](#Link3)
-
-
+<sup name="subfootnote">a</sup> Note that if you are using a custom tuberack or plate that is not already loaded on the [OT-2 Labware](https://docs.opentrons.com/v2/new_labware.html), then you must load it on using their [custom labware setup](https://labware.opentrons.com/create/) guide.
 
 
+
+<!-- 
 ## IMPORTANT: Before Starting<sup name="Link4"></sup>
 
-- Ensure the `source` tubes/falcons/eppendorfs are the same used for all the isotopes, i.e. do not use a 15mL falcon for one isotope and a 1.5 mL eppendorf for another.
-- Measure the inner diameter of the `source` tube, in millimetres, using a precise caliper and enter into the `diameter` variable under the '# mm_lost_per_ul' heading.
-- Under `source_headroom`, you will need to measure and insert the distance, in millimetres, from the top of the `source` tube (excluding the cap/lid) to the top of the meniscus of the solution using a precise caliper. 1 or 2 millimetres can be added onto this value to ensure the pipette tip enters into the solution.
-- The scripts only pipette the isotopes themselves and not the DMSO base solution. You will need to pipette this yourself into the `destination` plate before using this script.
-[↩](#Link4)
+the same consumables **(WRITE DOWN A LIST OF CONSUMABLES ON A WORD DOCUMENT!!)**
 
+[Return to contents](# )
+ -->
 
 
 
 ## Notes<sup name="Link5"></sup>:
 
-- For any tubes/eppendorfs/falcons used, it is recommended to use ones with a detachable lid/cap. This is so that the robot arm does not come into contact with any open lids whilst it moves positions.
-- It is recommended that a polypropylene 96 Deep Well Plate, which can hold at least 1 mL of volume, is used as a `destination` plate. It is also preferable to seal the plate tightly using an Aluminium Sealing film or a transparent after the protocol is completed.
-[↩](#Link5)
+- Seal the deep-well plate tightly using an aluminium or transparent sealing film after the protocol is completed.
+
 
 
 
@@ -109,4 +87,5 @@ I would like to acknowledge the aid of and thank:
 - And lastly, the [TAPE Lab](http://tape-lab.com/lab) group for their continuous support in helping create the TOBis barcoding strategy.
 
 The work here is actively being developed by Jahangir Sufi.
-[↩](#Link6)
+
+[Return to contents](# )
